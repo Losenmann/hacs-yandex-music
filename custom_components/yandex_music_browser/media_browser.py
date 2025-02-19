@@ -59,10 +59,10 @@ from homeassistant.components.media_player.const import (
     MEDIA_CLASS_GENRE,
     MEDIA_CLASS_PLAYLIST,
     MEDIA_CLASS_TRACK,
-    MEDIA_TYPE_ALBUM,
+    MediaType.ALBUM,
     MEDIA_TYPE_ARTIST,
-    MEDIA_TYPE_PLAYLIST,
-    MEDIA_TYPE_TRACK,
+    MediaType.PLAYLIST,
+    MediaType.TRACK,
 )
 from homeassistant.const import CONF_TIMEOUT
 from yaml import BaseLoader, YAMLError, load
@@ -1465,7 +1465,7 @@ def track_media_processor(
 
     return YandexBrowseMedia(
         title=track_title,
-        media_content_type=MEDIA_TYPE_TRACK,
+        media_content_type=MediaType.TRACK,
         media_class=MEDIA_CLASS_TRACK,
         thumbnail=media_object.cover_uri,
         media_content_id=str(media_object.id),
@@ -1507,7 +1507,7 @@ def album_media_processor(
 
     return YandexBrowseMedia(
         title=media_object.title,
-        media_content_type=MEDIA_TYPE_ALBUM,
+        media_content_type=MediaType.ALBUM,
         media_class=MEDIA_CLASS_ALBUM,
         thumbnail=media_object.cover_uri,
         media_content_id=str(media_object.id),
@@ -1564,7 +1564,7 @@ def playlist_media_processor(
 
     return YandexBrowseMedia(
         title=media_object.title,
-        media_content_type=MEDIA_TYPE_PLAYLIST,
+        media_content_type=MediaType.PLAYLIST,
         media_class=MEDIA_CLASS_PLAYLIST,
         thumbnail=media_object.animated_cover_uri or media_object.cover.uri,
         media_content_id=f"{media_object.owner.uid}:{media_object.kind}",
@@ -1709,7 +1709,7 @@ def genre_media_processor(
     )
 
 
-@register_type_browse_processor(MEDIA_TYPE_ALBUM, media_id_pattern=r"\d+")
+@register_type_browse_processor(MediaType.ALBUM, media_id_pattern=r"\d+")
 @adapt_type_to_browse_processor()
 def album_type_processor(
     browser: "YandexMusicBrowser", media_content_id: MediaContentIDType
@@ -1729,7 +1729,7 @@ def artist_type_processor(
         return artists[0]
 
 
-@register_type_browse_processor(MEDIA_TYPE_PLAYLIST, media_id_pattern=r"(\d+:)?\d+")
+@register_type_browse_processor(MediaType.PLAYLIST, media_id_pattern=r"(\d+:)?\d+")
 @adapt_type_to_browse_processor()
 def playlist_type_processor(
     browser: "YandexMusicBrowser", media_content_id: MediaContentIDType
@@ -1743,7 +1743,7 @@ def playlist_type_processor(
     )
 
 
-@register_type_browse_processor(MEDIA_TYPE_TRACK, media_id_pattern=r"\d+")
+@register_type_browse_processor(MediaType.TRACK, media_id_pattern=r"\d+")
 @adapt_type_to_browse_processor()
 def track_type_processor(
     browser: "YandexMusicBrowser", media_content_id: MediaContentIDType

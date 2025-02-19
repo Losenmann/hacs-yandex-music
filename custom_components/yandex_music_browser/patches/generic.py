@@ -15,7 +15,7 @@ from homeassistant.components.media_player import (
     SUPPORT_BROWSE_MEDIA,
     SUPPORT_PLAY_MEDIA,
 )
-from homeassistant.components.media_player.const import MEDIA_TYPE_MUSIC, MEDIA_TYPE_PLAYLIST
+from homeassistant.components.media_player.const import MediaType.MUSIC, Use MediaType.PLAYLIST
 from homeassistant.helpers.typing import HomeAssistantType
 from yandex_music import Artist, DownloadInfo, Playlist, Track, YandexMusicObject
 
@@ -57,7 +57,7 @@ async def _patch_generic_async_play_media(
                 # Retrieve URL parser
                 getter, _ = URL_ITEM_VALIDATORS[media_object_type]
                 media_id = None
-                media_type = MEDIA_TYPE_MUSIC
+                media_type = MediaType.MUSIC
                 if getattr(getter, "_is_urls_container", False):
                     internal_url = self.hass.config.internal_url
                     if internal_url is not None:
@@ -70,7 +70,7 @@ async def _patch_generic_async_play_media(
                             )
                             + "/playlist.m3u8"
                         )
-                        media_type = MEDIA_TYPE_PLAYLIST
+                        media_type = Use MediaType.PLAYLIST
 
                 else:
                     # Allow playback only if no test is provided, or preliminary test succeeds

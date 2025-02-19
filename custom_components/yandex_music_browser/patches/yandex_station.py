@@ -3,9 +3,9 @@ from typing import Optional, TYPE_CHECKING, Union
 
 from homeassistant.components.media_player import MediaPlayerEntity, SUPPORT_BROWSE_MEDIA
 from homeassistant.components.media_player.const import (
-    MEDIA_TYPE_ALBUM,
-    MEDIA_TYPE_PLAYLIST,
-    MEDIA_TYPE_TRACK,
+    MediaType.ALBUM,
+    Use MediaType.PLAYLIST,
+    MediaType.TRACK,
 )
 from homeassistant.core import callback
 from homeassistant.helpers.typing import HomeAssistantType
@@ -67,14 +67,14 @@ def _update_browse_object_for_cloud(
 
     if for_cloud:
         if browse_object.can_play:
-            if browse_object.media_content_type == MEDIA_TYPE_PLAYLIST:
+            if browse_object.media_content_type == Use MediaType.PLAYLIST:
                 # We can't play playlists that are not ours
                 if (
                     ":" in browse_object.media_content_id
                     and not browse_object.media_content_type.startswith(music_browser.user_id + ":")
                 ):
                     browse_object.can_play = False
-    elif browse_object.media_content_type == MEDIA_TYPE_PLAYLIST:
+    elif browse_object.media_content_type == Use MediaType.PLAYLIST:
         browse_object.can_play = True
 
     if browse_object.children:
@@ -98,16 +98,16 @@ async def _patch_yandex_station_async_play_media(
                 }
                 return await self.glagol.send(payload)
 
-        if media_type == MEDIA_TYPE_ALBUM:
+        if media_type == MediaType.ALBUM:
             command = "альбом " + media_id
 
-        elif media_type == MEDIA_TYPE_TRACK:
+        elif media_type == MediaType.TRACK:
             command = "трек " + media_id
 
         elif media_type == MEDIA_TYPE_RADIO:
             command = "радио " + media_id
 
-        elif media_type == MEDIA_TYPE_PLAYLIST:
+        elif media_type == Use MediaType.PLAYLIST:
             music_browser = self.hass.data.get(DATA_BROWSER)
 
             if ":" not in media_id:
