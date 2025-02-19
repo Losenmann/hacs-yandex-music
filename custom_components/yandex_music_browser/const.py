@@ -1,6 +1,6 @@
 from typing import Final
 
-DOMAIN: Final = "yandex_music"
+DOMAIN: Final = "yandex_music_browser"
 CONF_CACHE_TTL: Final = "cache_ttl"
 CONF_LANGUAGE: Final = "language"
 CONF_SHOW_HIDDEN: Final = "show_hidden"

@@ -1,5 +1,5 @@
 {
-  "domain": "yandex_music",
+  "domain": "yandex_music_browser",
   "name": "Yandex Music",
   "version": "v0.0.8",
   "documentation": "https://github.com/alryaz/hacs-yandex-music",

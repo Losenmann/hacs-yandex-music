@@ -8,14 +8,14 @@ from homeassistant.const import CONF_PASSWORD, CONF_USERNAME
 from homeassistant.helpers.typing import HomeAssistantType
 from yandex_music import Client
 
-from custom_components.yandex_music.const import (
+from custom_components.yandex_music_browser.const import (
     CONF_CREDENTIALS,
     CONF_X_TOKEN,
     DATA_AUTHENTICATORS,
     DATA_BROWSER,
     DOMAIN,
 )
-from custom_components.yandex_music.media_browser import (
+from custom_components.yandex_music_browser.media_browser import (
     YandexMusicBrowser,
     YandexMusicBrowserAuthenticationError,
 )
