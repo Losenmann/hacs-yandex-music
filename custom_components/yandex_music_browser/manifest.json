@@ -1,15 +1,15 @@
 {
-  "domain": "yandex_music_browser",
-  "name": "Yandex Music Browser",
+  "domain": "yandex_music",
+  "name": "Yandex Music",
   "version": "v0.0.8",
-  "documentation": "https://github.com/alryaz/hass-yandex-music-browser",
+  "documentation": "https://github.com/alryaz/hacs-yandex-music",
   "dependencies": [
     "http",
     "media_source"
   ],
-  "issue_tracker": "https://github.com/alryaz/hass-yandex-music-browser/issues",
+  "issue_tracker": "https://github.com/alryaz/hacs-yandex-music/issues",
   "codeowners": [
-    "@alryaz"
+    "@Losenmann"
   ],
   "config_flow": true,
   "requirements": [
