@@ -10,13 +10,13 @@ from homeassistant.components.media_player.const import (
 from homeassistant.core import callback
 from homeassistant.helpers.typing import HomeAssistantType
 
-from custom_components.yandex_music_browser.const import DATA_BROWSER, MEDIA_TYPE_RADIO
-from custom_components.yandex_music_browser.default import (
+from custom_components.yandex_music.const import DATA_BROWSER, MEDIA_TYPE_RADIO
+from custom_components.yandex_music.default import (
     async_get_music_browser,
     async_get_music_token,
 )
-from custom_components.yandex_music_browser.patches._base import _patch_root_async_browse_media
-from custom_components.yandex_music_browser.media_browser import (
+from custom_components.yandex_music.patches._base import _patch_root_async_browse_media
+from custom_components.yandex_music.media_browser import (
     YandexMusicBrowser,
     YandexMusicBrowserAuthenticationError,
     MAP_MEDIA_TYPE_TO_BROWSE,

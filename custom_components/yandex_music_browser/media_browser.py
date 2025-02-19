@@ -81,7 +81,7 @@ from yandex_music import (
     YandexMusicObject,
 )
 
-from custom_components.yandex_music_browser.const import (
+from custom_components.yandex_music.const import (
     CONF_CACHE_TTL,
     CONF_HEIGHT,
     CONF_IMAGE,

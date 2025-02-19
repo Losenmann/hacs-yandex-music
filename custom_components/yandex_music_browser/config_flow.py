@@ -4,7 +4,7 @@ import homeassistant.helpers.config_validation as cv
 import voluptuous as vol
 from homeassistant.config_entries import CONN_CLASS_CLOUD_POLL, ConfigFlow
 
-from custom_components.yandex_music_browser.const import CONF_PATCHES, DOMAIN, CONF_DEBUG
+from custom_components.yandex_music.const import CONF_PATCHES, DOMAIN, CONF_DEBUG
 
 PATCH_STATE_VALUES = {
     None: "auto",
@@ -14,7 +14,7 @@ PATCH_STATE_VALUES = {
 
 
 def _get_main_schema(default_values: Optional[Mapping[str, Any]] = None):
-    from custom_components.yandex_music_browser.patches import __all__ as patches_list
+    from custom_components.yandex_music.patches import __all__ as patches_list
 
     if default_values is None:
         default_values = {}

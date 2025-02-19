@@ -19,18 +19,18 @@ from homeassistant.components.media_player.const import MediaType.MUSIC, Use Med
 from homeassistant.helpers.typing import HomeAssistantType
 from yandex_music import Artist, DownloadInfo, Playlist, Track, YandexMusicObject
 
-from custom_components.yandex_music_browser.const import (
+from custom_components.yandex_music.const import (
     DATA_PLAY_KEY,
     DOMAIN,
     ROOT_MEDIA_CONTENT_TYPE,
 )
-from custom_components.yandex_music_browser.default import async_get_music_browser
-from custom_components.yandex_music_browser.media_browser import (
+from custom_components.yandex_music.default import async_get_music_browser
+from custom_components.yandex_music.media_browser import (
     YandexBrowseMedia,
     YandexMusicBrowser,
     YandexMusicBrowserException,
 )
-from custom_components.yandex_music_browser.patches._base import _patch_root_async_browse_media
+from custom_components.yandex_music.patches._base import _patch_root_async_browse_media
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -223,12 +223,12 @@ def _update_browse_object_for_url(
 class YandexMusicBrowserView(HomeAssistantView):
     """Handle Yandex Smart Home unauthorized requests."""
 
-    url = "/api/yandex_music_browser/v1.0/{key}/{media_type}/{media_id}"
+    url = "/api/yandex_music/v1.0/{key}/{media_type}/{media_id}"
     extra_urls = [
         url + "/playlist.m3u8",
         url + "/track.mp3",
     ]
-    name = "api:yandex_music_browser"
+    name = "api:yandex_music"
     requires_auth = False
 
     async def get(self, request: Request, key: str, media_type: str, media_id: str) -> Response:
