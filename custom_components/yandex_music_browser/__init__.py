@@ -17,7 +17,7 @@ from homeassistant.exceptions import ConfigEntryNotReady
 from homeassistant.helpers.typing import ConfigType, HomeAssistantType
 from homeassistant.loader import bind_hass
 
-from custom_components.yandex_music.const import (
+from custom_components.yandex_music_browser.const import (
     CONF_CACHE_TTL,
     CONF_CLASS,
     CONF_CREDENTIALS,
@@ -44,7 +44,7 @@ from custom_components.yandex_music.const import (
     ROOT_MEDIA_CONTENT_TYPE,
     SUPPORTED_BROWSER_LANGUAGES,
 )
-from custom_components.yandex_music.media_browser import (
+from custom_components.yandex_music_browser.media_browser import (
     BrowseTree,
     DEFAULT_MENU_OPTIONS,
     DEFAULT_THUMBNAIL_RESOLUTION,
@@ -96,7 +96,7 @@ def process_width_height_str(resolution: str):
 
 
 def validate_parsed_menu_options(menu_options: Mapping):
-    from custom_components.yandex_music.media_browser import BrowseTree
+    from custom_components.yandex_music_browser.media_browser import BrowseTree
 
     try:
         BrowseTree.from_map(menu_options, validate=True)
@@ -154,7 +154,7 @@ PATCHES_SCHEMA: Optional[vol.Schema] = None
 def lazy_load_patches_schema(value: Any):
     global PATCHES_SCHEMA
     if PATCHES_SCHEMA is None:
-        from custom_components.yandex_music.patches import __all__ as patches_list
+        from custom_components.yandex_music_browser.patches import __all__ as patches_list
 
         PATCHES_SCHEMA = vol.Schema(
             {
