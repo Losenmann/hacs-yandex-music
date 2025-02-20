@@ -15,7 +15,7 @@ from homeassistant.components.media_player import (
     SUPPORT_BROWSE_MEDIA,
     SUPPORT_PLAY_MEDIA,
 )
-from homeassistant.components.media_player.const import MediaType.MUSIC, Use MediaType.PLAYLIST
+from homeassistant.components.media_player.const import MediaType, Use MediaType
 from homeassistant.helpers.typing import HomeAssistantType
 from yandex_music import Artist, DownloadInfo, Playlist, Track, YandexMusicObject
 
