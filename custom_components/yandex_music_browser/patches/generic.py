@@ -15,7 +15,7 @@ from homeassistant.components.media_player import (
     MediaPlayerEntityFeature,
 )
 from homeassistant.components.media_player.const import MediaType
-from homeassistant.helpers.typing import HomeAssistantType
+from homeassistant.core import HomeAssistant
 from yandex_music import Artist, DownloadInfo, Playlist, Track, YandexMusicObject
 
 from custom_components.yandex_music_browser.const import (
@@ -185,7 +185,7 @@ def _patch_generic_get_attribute(self, attr: str):
 
 
 def _update_browse_object_for_url(
-    hass: HomeAssistantType,
+    hass: HomeAssistant,
     music_browser: "YandexMusicBrowser",
     browse_object: YandexBrowseMedia,
 ) -> YandexBrowseMedia:
@@ -232,7 +232,7 @@ class YandexMusicBrowserView(HomeAssistantView):
 
     async def get(self, request: Request, key: str, media_type: str, media_id: str) -> Response:
         """Handle Yandex Smart Home HEAD requests."""
-        hass: HomeAssistantType = request.app[KEY_HASS]
+        hass: HomeAssistant = request.app[KEY_HASS]
 
         # Bind to existence of config within HA data
         if DOMAIN not in hass.data or DATA_PLAY_KEY not in hass.data:
@@ -275,7 +275,7 @@ class YandexMusicBrowserView(HomeAssistantView):
 
 
 _TYandexMusicObject = TypeVar("_TYandexMusicObject", bound=YandexMusicObject)
-TURLGetter = Callable[[HomeAssistantType, _TYandexMusicObject], Optional[Union[str, Sequence[str]]]]
+TURLGetter = Callable[[HomeAssistant, _TYandexMusicObject], Optional[Union[str, Sequence[str]]]]
 
 
 GET_MEDIA_OBJECT_NAME = {
@@ -295,7 +295,7 @@ def register_url_processor(cls: Type[_TYandexMusicObject], requires_test: bool =
     return _wrapper
 
 
-def get_play_key(hass: HomeAssistantType):
+def get_play_key(hass: HomeAssistant):
     play_key = hass.data.get(DATA_PLAY_KEY)
 
     if play_key is None:
@@ -306,10 +306,10 @@ def get_play_key(hass: HomeAssistantType):
 
 
 def wrap_urls_container(
-    fn: Callable[[HomeAssistantType, _TYandexMusicObject], Optional[Sequence[Tuple[str, str]]]]
+    fn: Callable[[HomeAssistant, _TYandexMusicObject], Optional[Sequence[Tuple[str, str]]]]
 ):
     @wraps(fn)
-    def _wrapped(hass: HomeAssistantType, media_object: _TYandexMusicObject):
+    def _wrapped(hass: HomeAssistant, media_object: _TYandexMusicObject):
         internal_url = hass.config.internal_url
         if internal_url is None:
             _LOGGER.debug("To use track containers, you must set your Home Assistant internal URL")
@@ -335,7 +335,7 @@ def wrap_urls_container(
 
 @register_url_processor(Track, False)
 def get_track_play_url(
-    hass: HomeAssistantType, media_object: Track, codec: str = "mp3", bitrate_in_kbps: int = 192
+    hass: HomeAssistant, media_object: Track, codec: str = "mp3", bitrate_in_kbps: int = 192
 ) -> Optional[Tuple[str, float]]:
     download_info: Optional[List[DownloadInfo]] = media_object.download_info
     if download_info is None:
@@ -354,7 +354,7 @@ def get_track_play_url(
 @register_url_processor(Playlist)
 @wrap_urls_container
 def get_playlist_play_url(
-    hass: HomeAssistantType,
+    hass: HomeAssistant,
     media_object: Playlist,
 ) -> Sequence[Tuple[str, str]]:
     tracks = media_object.tracks
@@ -363,7 +363,7 @@ def get_playlist_play_url(
     return [("track", str(track.id)) for track in tracks]
 
 
-def install(hass: HomeAssistantType):
+def install(hass: HomeAssistant):
     from homeassistant.components.media_player import MediaPlayerEntity
 
     if MediaPlayerEntity.__getattribute__ is not _patch_generic_get_attribute:
@@ -374,7 +374,7 @@ def install(hass: HomeAssistantType):
     hass.http.register_view(YandexMusicBrowserView())
 
 
-def uninstall(hass: HomeAssistantType):
+def uninstall(hass: HomeAssistant):
     from homeassistant.components.media_player import MediaPlayerEntity
 
     if MediaPlayerEntity.__getattribute__ is _patch_generic_get_attribute:
