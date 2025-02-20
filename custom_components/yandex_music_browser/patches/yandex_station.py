@@ -1,22 +1,20 @@
 import logging
 from typing import Optional, TYPE_CHECKING, Union
 
-from homeassistant.components.media_player import MediaPlayerEntity, SUPPORT_BROWSE_MEDIA
+from homeassistant.components.media_player import MediaPlayerEntity, MediaPlayerEntityFeature
 from homeassistant.components.media_player.const import (
-    MediaType.ALBUM,
-    Use MediaType.PLAYLIST,
-    MediaType.TRACK,
+    MediaType,
 )
 from homeassistant.core import callback
 from homeassistant.helpers.typing import HomeAssistantType
 
-from custom_components.yandex_music.const import DATA_BROWSER, MEDIA_TYPE_RADIO
-from custom_components.yandex_music.default import (
+from custom_components.yandex_music_browser.const import DATA_BROWSER, MEDIA_TYPE_RADIO
+from custom_components.yandex_music_browser.default import (
     async_get_music_browser,
     async_get_music_token,
 )
-from custom_components.yandex_music.patches._base import _patch_root_async_browse_media
-from custom_components.yandex_music.media_browser import (
+from custom_components.yandex_music_browser.patches._base import _patch_root_async_browse_media
+from custom_components.yandex_music_browser.media_browser import (
     YandexMusicBrowser,
     YandexMusicBrowserAuthenticationError,
     MAP_MEDIA_TYPE_TO_BROWSE,
@@ -44,7 +42,7 @@ def _get_yandex_entities():
 def _patch_yandex_station_get_attribute(self, attr: str):
     if attr == "supported_features":
         supported_features = object.__getattribute__(self, attr)
-        supported_features |= SUPPORT_BROWSE_MEDIA
+        supported_features |= MediaPlayerEntityFeature.BROWSE_MEDIA
 
         return supported_features
 
@@ -67,14 +65,14 @@ def _update_browse_object_for_cloud(
 
     if for_cloud:
         if browse_object.can_play:
-            if browse_object.media_content_type == Use MediaType.PLAYLIST:
+            if browse_object.media_content_type == MediaType.PLAYLIST:
                 # We can't play playlists that are not ours
                 if (
                     ":" in browse_object.media_content_id
                     and not browse_object.media_content_type.startswith(music_browser.user_id + ":")
                 ):
                     browse_object.can_play = False
-    elif browse_object.media_content_type == Use MediaType.PLAYLIST:
+    elif browse_object.media_content_type == MediaType.PLAYLIST:
         browse_object.can_play = True
 
     if browse_object.children:
@@ -107,7 +105,7 @@ async def _patch_yandex_station_async_play_media(
         elif media_type == MEDIA_TYPE_RADIO:
             command = "радио " + media_id
 
-        elif media_type == Use MediaType.PLAYLIST:
+        elif media_type == MediaType.PLAYLIST:
             music_browser = self.hass.data.get(DATA_BROWSER)
 
             if ":" not in media_id:
