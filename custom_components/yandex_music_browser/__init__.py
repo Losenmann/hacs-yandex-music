@@ -12,7 +12,11 @@ from typing import Any, Final, Mapping, Optional
 import homeassistant.helpers.config_validation as cv
 import voluptuous as vol
 from homeassistant.config_entries import ConfigEntry, SOURCE_IMPORT
-from homeassistant.const import *
+from homeassistant.const import (
+    CONF_TIMEOUT,
+    CONF_USERNAME,
+    CONF_PASSWORD,
+)
 from homeassistant.exceptions import ConfigEntryNotReady
 from homeassistant.helpers.typing import ConfigType
 from homeassistant.loader import bind_hass
@@ -285,12 +289,13 @@ async def async_setup_entry(hass: HomeAssistant, config_entry: ConfigEntry) -> b
         uninstalls = {}
         authenticators = {}
         
-        from importlib import import_module
+        from homeassistant.helpers.importlib import async_import_module
 
         for patch_installing, is_enabled in config.get(CONF_PATCHES, {}).items():
             if is_enabled is True or is_enabled is None:
                 try:
-                    patch_module = import_module(
+                    patch_module = await async_import_module(
+                        hass,
                         f"custom_components.{DOMAIN}.patches.{patch_installing}"
                     )
                 except ImportError as e:
