@@ -1,31 +1,32 @@
 Браузер медиа для плагина Yandex Station
 ========================================
+
+[![Home Assistant](https://img.shields.io/badge/home_assistant-41BDF5.svg?style=for-the-badge&logo=home-assistant&logoColor=white)](https://www.home-assistant.io)
+[![HACS](https://img.shields.io/badge/hacs-integration-41BDF5.svg?style=for-the-badge)](https://hacs.xyz/docs/use/repositories/type/integration/)
+![License](https://img.shields.io/github/license/losenmann/hacs-yandex-music?style=for-the-badge&color=FF0000)
+[![Release](https://img.shields.io/github/release/Losenmann/hacs-auth-aaa/all.svg?style=for-the-badge)](https://github.com/Losenmann/hacs-yandex-music/releases)
+[![Maintainer](https://img.shields.io/badge/maintainer-@losenmann-FF6E00?style=for-the-badge)](https://github.com/Losenmann)
+[![Donate](https://img.shields.io/badge/donate-yoomoney-8B3FFD.svg?style=for-the-badge)](https://yoomoney.ru/to/410015216730856)
+
 > Включайте музыку, плейлисты и радио на Яндекс.Станции из Home Assistant!
->
-> [![hacs_badge](https://img.shields.io/badge/HACS-Custom-orange.svg)](https://github.com/custom-components/hacs)
-> [![Лицензия](https://img.shields.io/badge/%D0%9B%D0%B8%D1%86%D0%B5%D0%BD%D0%B7%D0%B8%D1%8F-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-> [![Поддержка](https://img.shields.io/badge/%D0%9F%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%B8%D0%B2%D0%B0%D0%B5%D1%82%D1%81%D1%8F%3F-%D0%B4%D0%B0-green.svg)](https://github.com/alryaz/hass-lkcomu-interrao/graphs/commit-activity)
->
-> [![Пожертвование Yandex](https://img.shields.io/badge/%D0%9F%D0%BE%D0%B6%D0%B5%D1%80%D1%82%D0%B2%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-Yandex-red.svg)](https://money.yandex.ru/to/410012369233217)
-> [![Пожертвование PayPal](https://img.shields.io/badge/%D0%9F%D0%BE%D0%B6%D0%B5%D1%80%D1%82%D0%B2%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-Paypal-blueviolet.svg)](https://www.paypal.me/alryaz)
 
 ## Скриншот
 <details>
   <summary><b>Корневой раздел: Библиотека</b></summary>  
-  <img src="https://raw.githubusercontent.com/alryaz/hass-yandex-music-browser/main/images/library.png" alt="Библиотека">
+  <img src="https://raw.githubusercontent.com/losenmann/hass-yandex-music/main/images/library.png" alt="Библиотека">
 </details>
 <details>
   <summary><b>Раздел: Жанры</b></summary>  
-  <img src="https://raw.githubusercontent.com/alryaz/hass-yandex-music-browser/main/images/genres.png" alt="Жанры">
+  <img src="https://raw.githubusercontent.com/losenmann/hass-yandex-music/main/images/genres.png" alt="Жанры">
 </details>
 <details>
   <summary><b>Раздел: Новые релизы</b></summary>  
-  <img src="https://raw.githubusercontent.com/alryaz/hass-yandex-music-browser/main/images/new_releases.png" alt="Новые релизы">
+  <img src="https://raw.githubusercontent.com/losenmann/hass-yandex-music/main/images/new_releases.png" alt="Новые релизы">
 </details>
 <details>
   <summary><b>Работа компонента с плеером сторонней интеграции</b></summary>    
   <b>- Медиацентр Kodi:</b><br>
-  <img src="https://raw.githubusercontent.com/alryaz/hass-yandex-music-browser/main/images/generic_player.png" alt="Медиацентр Kodi">
+  <img src="https://raw.githubusercontent.com/losenmann/hass-yandex-music/main/images/generic_player.png" alt="Медиацентр Kodi">
 </details>
 
 ## Введение
@@ -43,7 +44,7 @@
 1. Откройте HACS (через `Extensions` в боковой панели)
 1. Добавьте новый произвольный репозиторий:
    1. Выберите `Integration` (`Интеграция`) в качестве типа репозитория
-   1. Введите ссылку на репозиторий: `https://github.com/alryaz/hass-yandex-music-browser`
+   1. Введите ссылку на репозиторий: `https://github.com/losenmann/hass-yandex-music`
    1. Нажмите кнопку `Add` (`Добавить`)
    1. Дождитесь добавления репозитория (занимает до 10 секунд)
    1. Теперь вы должны видеть доступную интеграцию `Yandex Music Browser` (`Браузер Яндекс Музыки`) в списке новых интеграций.
@@ -59,9 +60,9 @@
 репозитория в папку `custom_components` внутри папки конфигурации HomeAssistant.
 Пример (при условии, что конфигурация HomeAssistant доступна по адресу `/mnt/homeassistant/config`) для Unix-систем:
 ```
-git clone https://github.com/alryaz/hass-yandex-music-browser.git hass-yandex-music-browser
+git clone https://github.com/losenmann/hass-yandex-music.git hass-yandex-music
 mkdir -p /mnt/homeassistant/config/custom_components
-mv hass-yandex-music-browser/custom_components/yandex_music_browser /mnt/homeassistant/config/custom_components/
+mv hass-yandex-music/custom_components/yandex_music_browser /mnt/homeassistant/config/custom_components/
 ```
 
 ## Конфигурация
@@ -126,15 +127,15 @@ yandex_music_browser:
 
 <details>
   <summary><b>Корневой раздел</b></summary>  
-  <img src="https://raw.githubusercontent.com/alryaz/hass-yandex-music-browser/main/images/hierarchy/root.png" alt="Корневой раздел">
+  <img src="https://raw.githubusercontent.com/losenmann/hass-yandex-music/main/images/hierarchy/root.png" alt="Корневой раздел">
 </details>
 <details>
   <summary><b>Папка "Юзвери"</b></summary>  
-  <img src="https://raw.githubusercontent.com/alryaz/hass-yandex-music-browser/main/images/hierarchy/users.png" alt="Папка &quot;Юзвери&quot;">
+  <img src="https://raw.githubusercontent.com/losenmann/hass-yandex-music/main/images/hierarchy/users.png" alt="Папка &quot;Юзвери&quot;">
 </details>
 <details>
   <summary><b>Папка "И их любимые альбомы"</b></summary>  
-  <img src="https://raw.githubusercontent.com/alryaz/hass-yandex-music-browser/main/images/hierarchy/albums.png" alt="Папка &quot;И их любимые альбомы&quot;">
+  <img src="https://raw.githubusercontent.com/losenmann/hass-yandex-music/main/images/hierarchy/albums.png" alt="Папка &quot;И их любимые альбомы&quot;">
 </details>
 
 #### Перечень доступных предустановок
