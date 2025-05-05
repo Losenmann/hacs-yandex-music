@@ -13,6 +13,7 @@ import homeassistant.helpers.config_validation as cv
 import voluptuous as vol
 from homeassistant.config_entries import ConfigEntry, SOURCE_IMPORT
 from homeassistant.const import (
+    CONF_SOURCE,
     CONF_TIMEOUT,
     CONF_USERNAME,
     CONF_PASSWORD,
